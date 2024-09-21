@@ -1,12 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Boostrapper", "Boostrapper", "{36FA5264-CCB8-43EE-8358-C265D02EF783}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{80B124D0-15E0-43ED-9540-4B3D16E8D546}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{8F244ECC-4BBD-42E7-B459-DB7563323681}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{60B187B3-7660-4606-9C46-E52EFE249C9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{60B187B3-7660-4606-9C46-E52EFE249C9A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{245BBBEB-9CD1-40AB-BEDC-A61EEFAD86F2}"
 EndProject
@@ -14,13 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{C7DC0E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering", "Ordering", "{4D8207A5-C97A-409E-BC20-6627EFD8AF3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog", "Modules\Catalog\Catalog\Catalog.csproj", "{B663CED9-006F-4F41-87A8-F3DE3E01157C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog", "Modules\Catalog\Catalog\Catalog.csproj", "{B663CED9-006F-4F41-87A8-F3DE3E01157C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket", "Modules\Basket\Basket\Basket.csproj", "{64794244-88CA-4E42-B2DA-B66EC404CFB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket", "Modules\Basket\Basket\Basket.csproj", "{64794244-88CA-4E42-B2DA-B66EC404CFB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering", "Modules\Ordering\Ordering\Ordering.csproj", "{1167A833-153A-4C11-B7F3-02E1C747FACA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering", "Modules\Ordering\Ordering\Ordering.csproj", "{1167A833-153A-4C11-B7F3-02E1C747FACA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared\Shared.csproj", "{C2B8B313-21FC-4A08-A199-40A6F08B2887}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared\Shared.csproj", "{C2B8B313-21FC-4A08-A199-40A6F08B2887}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{12AFF4E1-34D3-4482-B41F-282CC5E4787D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +53,13 @@ Global
 		{C2B8B313-21FC-4A08-A199-40A6F08B2887}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2B8B313-21FC-4A08-A199-40A6F08B2887}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2B8B313-21FC-4A08-A199-40A6F08B2887}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12AFF4E1-34D3-4482-B41F-282CC5E4787D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12AFF4E1-34D3-4482-B41F-282CC5E4787D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12AFF4E1-34D3-4482-B41F-282CC5E4787D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12AFF4E1-34D3-4482-B41F-282CC5E4787D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{60B187B3-7660-4606-9C46-E52EFE249C9A} = {36FA5264-CCB8-43EE-8358-C265D02EF783}
@@ -58,5 +70,8 @@ Global
 		{64794244-88CA-4E42-B2DA-B66EC404CFB7} = {C7DC0E9F-E0AC-4BA2-87C2-7CF39CF7A847}
 		{1167A833-153A-4C11-B7F3-02E1C747FACA} = {4D8207A5-C97A-409E-BC20-6627EFD8AF3A}
 		{C2B8B313-21FC-4A08-A199-40A6F08B2887} = {8F244ECC-4BBD-42E7-B459-DB7563323681}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C19EEDD-97F5-4D84-AE6F-6E8EB5005B3B}
 	EndGlobalSection
 EndGlobal

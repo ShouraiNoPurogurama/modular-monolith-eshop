@@ -1,5 +1,6 @@
 ﻿namespace Shared.DDD;
 
+//Aggregate: This class include domain events and able to raise domain events
 public abstract class Aggregate<TId> : Entity<TId>, IAggregate<TId>
 {
     private readonly List<IDomainEvent> _domainEvents = new();

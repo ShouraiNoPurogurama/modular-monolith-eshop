@@ -7,6 +7,7 @@ public class ProductPriceChangedHandler(ILogger logger)
 {
     public Task Handle(ProductPriceChangedEvent notification, CancellationToken cancellationToken)
     {
+        //TODO add logic to handle price changed event
         logger.LogInformation("Domain Event handled: {DomainEvent}", notification.GetType().Name);
         return Task.CompletedTask;
     }

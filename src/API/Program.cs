@@ -11,6 +11,8 @@ var config = builder.Configuration;
 //
 //     config.WithModules(catalogModules);
 // });
+
+//file:///C:/ASPNetCore/modular-monolith-eshop/src/API/bin/Debug/net8.0/Catalog.dll
 builder.Services.AddCarterWithAssemblies(typeof(CatalogModule).Assembly);
 
 builder.Services.AddControllers();
@@ -19,6 +21,7 @@ builder.Services
     .AddCatalogModule(config)
     .AddBasketModule(config)
     .AddOrderingModule(config);
+
 
 var app = builder.Build();
 

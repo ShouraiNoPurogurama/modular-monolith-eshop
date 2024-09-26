@@ -3,6 +3,14 @@
 public record DeleteProductCommand(Guid ProductId)
     : ICommand<DeleteProductResult>;
 
+public class DeleteProductCommnadValidator : AbstractValidator<DeleteProductCommand>
+{
+    public DeleteProductCommnadValidator()
+    {
+        RuleFor(c => c.ProductId).NotEmpty().WithMessage("Id is required");
+    }
+}
+
 public record DeleteProductResult(bool IsSuccess);
 
 public class DeleteProductHandler(CatalogDbContext dbContext) : ICommandHandler<DeleteProductCommand, DeleteProductResult>
@@ -13,7 +21,7 @@ public class DeleteProductHandler(CatalogDbContext dbContext) : ICommandHandler<
 
         if (product is null)
         {
-            throw new Exception($"Product not found: {command.ProductId}");
+            throw new ProductNotFoundException(command.ProductId);
         }
 
         dbContext.Products.Remove(product);

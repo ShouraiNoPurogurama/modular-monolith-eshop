@@ -15,6 +15,7 @@ public class CreateProductEndpoint : ICarterModule
         {
             var command = request.Adapt<CreateProductCommand>();
             
+            //Fluent validator will be triggered after this line
             var result = await sender.Send(command);
 
             var response = result.Adapt<CreateProductResponse>();

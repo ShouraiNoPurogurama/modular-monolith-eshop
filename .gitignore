@@ -5,7 +5,6 @@ src/API/appsettings.Development.json
 /workspace.xml
 # Rider ignored files
 /.idea..NETcore.iml
-/.idea.NETcore.iml
 /modules.xml
 /projectSettingsUpdater.xml
 /contentModel.xml
@@ -14,3 +13,22 @@ src/API/appsettings.Development.json
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+.idea/
+/build/
+*.suo
+*.user
+_ReSharper.*/
+*.sdf
+bin/
+obj/
+Debug/
+Release/
+*.opensdf
+*.tlog
+*.log
+TestResult.xml
+*.VisualState.xml
+Version.cs
+Version.h
+Version.cpp

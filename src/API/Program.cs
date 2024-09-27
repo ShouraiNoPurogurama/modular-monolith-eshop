@@ -1,11 +1,10 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog(
+    (context, config) => { config.ReadFrom.Configuration(context.Configuration); });
+
 var config = builder.Configuration;
 
 //Add services to the container
@@ -29,10 +28,14 @@ builder.Services
     .AddBasketModule(config)
     .AddOrderingModule(config);
 
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
 
 app.MapCarter();
+app.UseSerilogRequestLogging();
+//Force the app to use custom exception handler
+app.UseExceptionHandler(option => { });
 
 app
     .UseCatalogModule()
@@ -43,29 +46,5 @@ app
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseExceptionHandler(exceptionHandlerApp =>
-    {
-        exceptionHandlerApp.Run(async context =>
-        {
-            var exception = context.Features.Get<IExceptionHandlerFeature>()?.Error;
-            if (exception is null) return;
-
-            var problemDetails = new ProblemDetails()
-            {
-                Title = exception.Message,
-                Status = StatusCodes.Status500InternalServerError,
-                Detail = exception.StackTrace?.TrimStart()
-            };
-
-            var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
-            logger.LogError(exception, exception.Message);
-
-            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            context.Response.ContentType = "application/problem+json";
-            await context.Response.WriteAsJsonAsync(problemDetails);
-        });
-    }
-);
 
 app.Run();

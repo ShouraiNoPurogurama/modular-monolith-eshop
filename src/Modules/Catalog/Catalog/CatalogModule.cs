@@ -18,6 +18,7 @@ public static class CatalogModule
             config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             //register mediator validation behavior (custom validation) to request pipeline
             config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            config.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

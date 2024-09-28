@@ -16,8 +16,7 @@ public class GetProductsHandler(CatalogDbContext dbContext)
         var pageIndex = query.PaginationRequest.PageIndex;
 
         var totalCount = await dbContext.Products.LongCountAsync(cancellationToken: cancellationToken);
-
-
+        
         var products = await dbContext.Products
             .AsNoTracking()
             .OrderBy(p => p.Name)

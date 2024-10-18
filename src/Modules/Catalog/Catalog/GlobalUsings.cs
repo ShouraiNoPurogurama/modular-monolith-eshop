@@ -18,4 +18,3 @@ global using Microsoft.AspNetCore.Routing;
 global using FluentValidation;
 
 global using Catalog.Products.Exceptions;
-

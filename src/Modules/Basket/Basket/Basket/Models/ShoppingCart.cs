@@ -39,4 +39,14 @@ public class ShoppingCart : Aggregate<Guid>
             _items.Add(newItem);
         }
     }
+
+    public void RemoveItem(Guid productId)
+    {
+        var existingItem = Items.FirstOrDefault(x => x.ProductId.Equals(productId));
+
+        if (existingItem is not null)
+        {
+            _items.Remove(existingItem);
+        }
+    }
 }

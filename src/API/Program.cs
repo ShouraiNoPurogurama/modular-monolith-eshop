@@ -1,5 +1,3 @@
-using Serilog;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog(
@@ -7,22 +5,24 @@ builder.Host.UseSerilog(
 
 var config = builder.Configuration;
 
-//Add services to the container
-// builder.Services.AddCarter(configurator: config =>
-// {
-//     //get all types that implements ICarterModule in CatalogModule assembly
-//     var catalogModules = typeof(CatalogModule).Assembly.GetTypes()
-//         .Where(t => t.IsAssignableTo(typeof(ICarterModule)))
-//         .ToArray();
-//
-//     config.WithModules(catalogModules);
-// });
+// file:///C:/ASPNetCore/modular-monolith-eshop/src/API/bin/Debug/net8.0/Catalog.dll
+var catalogAssembly = typeof(CatalogModule).Assembly;
+var basketAssembly = typeof(BasketModule).Assembly;
 
-//file:///C:/ASPNetCore/modular-monolith-eshop/src/API/bin/Debug/net8.0/Catalog.dll
-builder.Services.AddCarterWithAssemblies(typeof(CatalogModule).Assembly);
+//Common services: carter, mediatr, fluentvalidation
+builder.Services.AddCarterWithAssemblies(catalogAssembly, basketAssembly);
+
+builder.Services.AddMediatR(configuration =>
+{
+    configuration.RegisterServicesFromAssemblies(catalogAssembly, basketAssembly);
+    configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
+});
+builder.Services.AddValidatorsFromAssemblies([catalogAssembly, basketAssembly]);
 
 builder.Services.AddControllers();
 
+//module services: catalog, basket, ordering
 builder.Services
     .AddCatalogModule(config)
     .AddBasketModule(config)

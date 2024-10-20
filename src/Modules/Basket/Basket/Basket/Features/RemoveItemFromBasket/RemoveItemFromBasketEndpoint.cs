@@ -10,7 +10,7 @@ public class RemoveItemFromBasketEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/basket/{userName}/items/{productId}", async (
+        app.MapDelete("/basket/{userName}/items/{productId}", async (
                 [FromRoute] string userName,
                 [FromRoute] Guid productId,
                 ISender sender) =>

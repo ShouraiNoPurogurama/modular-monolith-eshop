@@ -5,24 +5,17 @@ builder.Host.UseSerilog(
 
 var config = builder.Configuration;
 
-// file:///C:/ASPNetCore/modular-monolith-eshop/src/API/bin/Debug/net8.0/Catalog.dll
+//C:/ASPNetCore/modular-monolith-eshop/src/API/bin/Debug/net8.0/Catalog.dll
 var catalogAssembly = typeof(CatalogModule).Assembly;
 var basketAssembly = typeof(BasketModule).Assembly;
 
 //Common services: carter, mediatr, fluentvalidation
 builder.Services.AddCarterWithAssemblies(catalogAssembly, basketAssembly);
-
-builder.Services.AddMediatR(configuration =>
-{
-    configuration.RegisterServicesFromAssemblies(catalogAssembly, basketAssembly);
-    configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
-    configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
-});
-builder.Services.AddValidatorsFromAssemblies([catalogAssembly, basketAssembly]);
+builder.Services.AddMediatRWithAssemblies(catalogAssembly, basketAssembly);
 
 builder.Services.AddControllers();
 
-//module services: catalog, basket, ordering
+//Module services: catalog, basket, ordering
 builder.Services
     .AddCatalogModule(config)
     .AddBasketModule(config)

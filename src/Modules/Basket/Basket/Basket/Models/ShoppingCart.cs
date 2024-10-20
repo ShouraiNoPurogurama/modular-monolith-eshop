@@ -1,3 +1,5 @@
+using Shared.Exceptions;
+
 namespace Basket.Models;
 
 public class ShoppingCart : Aggregate<Guid>
@@ -47,6 +49,10 @@ public class ShoppingCart : Aggregate<Guid>
         if (existingItem is not null)
         {
             _items.Remove(existingItem);
+        }
+        else
+        {
+            throw new NotFoundException("Item", nameof(ShoppingCartItem));
         }
     }
 }

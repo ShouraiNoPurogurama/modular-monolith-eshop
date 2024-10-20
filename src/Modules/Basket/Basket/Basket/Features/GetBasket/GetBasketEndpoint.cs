@@ -1,6 +1,6 @@
 namespace Basket.Basket.Features.GetBasket;
 
-public record GetBasketResponse(ShoppingCartDto ShoppingCartDto);
+public record GetBasketResponse(ShoppingCartDto ShoppingCart);
 
 public class GetBasketEndpoint : ICarterModule
 {
@@ -11,7 +11,7 @@ public class GetBasketEndpoint : ICarterModule
                 var result = await sender.Send(new GetBasketQuery(userName));
 
                 var response = result.Adapt<GetBasketResponse>();
-                Results.Ok(response);
+                return Results.Ok(response);
             })
             .Produces<GetBasketResponse>()
             .ProducesProblem(StatusCodes.Status400BadRequest)

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.Basket.Features.AddItemIntoBasket;
 
-public record AddItemIntoBasketRequest(string UserName, ShoppingCartItemDto ShoppingCartItemDto);
+public record AddItemIntoBasketRequest(ShoppingCartItemDto ShoppingCartItem);
 
 public record AddItemIntoBasketResponse(Guid Id);
 
@@ -13,7 +13,7 @@ public class AddItemIntoBasketEndpoint : ICarterModule
         app.MapPost("/basket/{userName}/items",
                 async ([FromRoute] string userName, [FromBody] AddItemIntoBasketRequest request, ISender sender) =>
                 {
-                    var command = new AddItemIntoBasketCommand(userName, request.ShoppingCartItemDto);
+                    var command = new AddItemIntoBasketCommand(userName, request.ShoppingCartItem);
 
                     var result = await sender.Send(command);
 

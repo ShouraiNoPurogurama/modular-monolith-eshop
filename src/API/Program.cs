@@ -9,9 +9,15 @@ var config = builder.Configuration;
 var catalogAssembly = typeof(CatalogModule).Assembly;
 var basketAssembly = typeof(BasketModule).Assembly;
 
-//Common services: carter, mediatr, fluentvalidation
+//Common services: carter, mediatr, FluentValidation
 builder.Services.AddCarterWithAssemblies(catalogAssembly, basketAssembly);
 builder.Services.AddMediatRWithAssemblies(catalogAssembly, basketAssembly);
+
+//Regis redis cache
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
 
 builder.Services.AddControllers();
 

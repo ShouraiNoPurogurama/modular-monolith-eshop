@@ -14,7 +14,7 @@ public class GetBasketHandler : IQueryHandler<GetBasketQuery, GetBasketResult>
     }
     public async Task<GetBasketResult> Handle(GetBasketQuery query, CancellationToken cancellationToken)
     {
-        var basket = await _basketRepository.GetBasket(query.UserName, false, cancellationToken);
+        var basket = await _basketRepository.GetBasket(query.UserName, true, cancellationToken);
 
         var basketDto = basket.Adapt<ShoppingCartDto>();
 

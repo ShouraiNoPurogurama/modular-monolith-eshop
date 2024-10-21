@@ -13,6 +13,14 @@ services:
       - "5433:5432"
     volumes:
       - postgres_eshopdb:/var/lib/postgresql/data/
+  
+  distributedCache:
+    image: redis
+    container_name: distributedcache
+    restart: always
+    ports:
+      - "6379:6379"
+  
   seq:
     image: datalust/seq:latest
     container_name: seq

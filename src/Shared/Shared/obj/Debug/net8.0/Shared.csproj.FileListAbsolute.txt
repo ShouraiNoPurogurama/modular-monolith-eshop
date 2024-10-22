@@ -13,3 +13,6 @@ C:\ASPNetCore\modular-monolith-eshop\src\Shared\Shared\obj\Debug\net8.0\refint\S
 C:\ASPNetCore\modular-monolith-eshop\src\Shared\Shared\obj\Debug\net8.0\Shared.pdb
 C:\ASPNetCore\modular-monolith-eshop\src\Shared\Shared\obj\Debug\net8.0\Shared.genruntimeconfig.cache
 C:\ASPNetCore\modular-monolith-eshop\src\Shared\Shared\obj\Debug\net8.0\ref\Shared.dll
+C:\ASPNetCore\modular-monolith-eshop\src\Shared\Shared\bin\Debug\net8.0\SharedContracts.dll
+C:\ASPNetCore\modular-monolith-eshop\src\Shared\Shared\bin\Debug\net8.0\SharedContracts.pdb
+C:\ASPNetCore\modular-monolith-eshop\src\Shared\Shared\obj\Debug\net8.0\Shared.csproj.Up2Date

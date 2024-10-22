@@ -1,3 +1,5 @@
+using Catalog.Contracts.Products.Features.GetProductById;
+
 namespace Basket.Basket.Features.AddItemIntoBasket;
 
 public record AddItemIntoBasketCommand(string UserName, ShoppingCartItemDto ShoppingCartItemDto)
@@ -15,30 +17,28 @@ public class AddItemIntoBasketValidator : AbstractValidator<AddItemIntoBasketCom
     }
 }
 
-public class AddItemIntoBasketHandler : ICommandHandler<AddItemIntoBasketCommand, AddItemIntoBasketResult>
+public class AddItemIntoBasketHandler(IBasketRepository basketRepository, ISender sender)
+    : ICommandHandler<AddItemIntoBasketCommand, AddItemIntoBasketResult>
 {
-    private readonly IBasketRepository _basketRepository;
-
-    public AddItemIntoBasketHandler(IBasketRepository basketRepository)
-    {
-        _basketRepository = basketRepository;
-    }
-
     public async Task<AddItemIntoBasketResult> Handle(AddItemIntoBasketCommand command, CancellationToken cancellationToken)
     {
-        var basket = await _basketRepository.GetBasket(command.UserName, false, cancellationToken);
+        var basket = await basketRepository.GetBasket(command.UserName, false, cancellationToken);
 
         var shoppingCartItemDto = command.ShoppingCartItemDto;
+
+        //Before add item into SC, we should call Catalog module GetProductById method
+        //Get latest product information and set Price and ProductName when adding item 
+        var result = await sender.Send(new GetProductByIdQuery(command.ShoppingCartItemDto.ProductId), cancellationToken);
 
         basket.AddItem(
             shoppingCartItemDto.ProductId,
             shoppingCartItemDto.Quantity,
             shoppingCartItemDto.Color,
-            shoppingCartItemDto.Price,
-            shoppingCartItemDto.ProductName
+            result.Product.Price,
+            result.Product.Name
         );
 
-        await _basketRepository.SaveChangesAsync(command.UserName, cancellationToken);
+        await basketRepository.SaveChangesAsync(command.UserName, cancellationToken);
 
         return new AddItemIntoBasketResult(basket.Id);
     }

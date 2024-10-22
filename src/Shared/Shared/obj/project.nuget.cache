@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZGTpKaKRWA3scGftyJRwIs0kYJR0M+cXGMWVPLvxmUaG23+xDKfrEl3spbfTB5WeEDEVFVguLMtACnzpHOSQqw==",
+  "dgSpecHash": "7wEqXg4ngUQfYfQLqG2M9j7i6NysF6L51cvbZxpctr+o0pmJCSjo8LmMPMQx/Lbrkg59Jr7bWJR6B6CJPXCqAQ==",
   "success": true,
   "projectFilePath": "C:\\ASPNetCore\\modular-monolith-eshop\\src\\Shared\\Shared\\Shared.csproj",
   "expectedPackageFiles": [

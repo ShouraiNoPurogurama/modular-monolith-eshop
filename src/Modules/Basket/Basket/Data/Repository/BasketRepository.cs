@@ -1,3 +1,5 @@
+using Basket.Basket.Models;
+
 namespace Basket.Data.Repository;
 
 public class BasketRepository(BasketDbContext dbContext) : IBasketRepository

@@ -1065,6 +1065,19 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "SharedContracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "MediatR": "12.4.1"
+        },
+        "compile": {
+          "bin/placeholder/SharedContracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SharedContracts.dll": {}
+        }
       }
     }
   },
@@ -2698,6 +2711,11 @@
         "system.threading.channels.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "SharedContracts/1.0.0": {
+      "type": "project",
+      "path": "../SharedContracts/SharedContracts.csproj",
+      "msbuildProject": "../SharedContracts/SharedContracts.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2707,7 +2725,6 @@
       "FluentValidation.AspNetCore >= 11.3.0",
       "FluentValidation.DependencyInjectionExtensions >= 11.10.0",
       "Mapster >= 7.4.0",
-      "MediatR >= 12.4.1",
       "Microsoft.EntityFrameworkCore >= 8.0.4",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.4",
@@ -2715,7 +2732,8 @@
       "Microsoft.Extensions.Configuration.Abstractions >= 8.0.0",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 8.0.1",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 8.0.4",
-      "Scrutor >= 5.0.0"
+      "Scrutor >= 5.0.0",
+      "SharedContracts >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2744,7 +2762,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\ASPNetCore\\modular-monolith-eshop\\src\\Shared\\SharedContracts\\SharedContracts.csproj": {
+              "projectPath": "C:\\ASPNetCore\\modular-monolith-eshop\\src\\Shared\\SharedContracts\\SharedContracts.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -2776,10 +2798,6 @@
           "Mapster": {
             "target": "Package",
             "version": "[7.4.0, )"
-          },
-          "MediatR": {
-            "target": "Package",
-            "version": "[12.4.1, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",

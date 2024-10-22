@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Basket.Basket.Models;
 
 namespace Basket.Data.JsonConverters;
 

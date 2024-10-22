@@ -1,3 +1,5 @@
+using Basket.Basket.Models;
+
 namespace Basket.Data;
 
 public class BasketDbContext : DbContext

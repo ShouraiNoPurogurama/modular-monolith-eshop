@@ -1,6 +1,6 @@
 using Shared.Exceptions;
 
-namespace Basket.Models;
+namespace Basket.Basket.Models;
 
 public class ShoppingCart : Aggregate<Guid>
 {

@@ -1,4 +1,5 @@
 There is a couple of modules implemented EShop domain over Catalog, Basket, Identity and Ordering modules with Cloud-native Backing services (Redis, RabbitMQ, Keycloak) and Relational PostgreSQL databases isolated db schemas, communicating over RabbitMQ Event Driven Communication and following VSA, DDD, CQRS and Outbox Patterns.
+
 ![image](https://github.com/user-attachments/assets/29c506c6-7505-4d76-b786-885797986cd0)
 
 

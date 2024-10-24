@@ -1,14 +1,28 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MassTransit;
+using Microsoft.Extensions.Logging;
+using Shared.Messaging.Events;
 
 namespace Catalog.Products.EventHandlers;
 
-public class ProductPriceChangedHandler(ILogger<ProductPriceChangedEvent> logger) 
+//Convert the domain event into Integration event
+public class ProductPriceChangedHandler(IBus bus,ILogger<ProductPriceChangedEvent> logger)
     : INotificationHandler<ProductPriceChangedEvent>
 {
-    public Task Handle(ProductPriceChangedEvent notification, CancellationToken cancellationToken)
+    public async Task Handle(ProductPriceChangedEvent notification, CancellationToken cancellationToken)
     {
-        //TODO add logic to handle price changed event
         logger.LogInformation("Domain Event handled: {DomainEvent}", notification.GetType().Name);
-        return Task.CompletedTask;
+
+        //Public product price changed integration event for update basket prices
+        var integrationEvent = new ProductPriceChangedIntegrationEvent
+        {
+            ProductId = notification.Product.Id,
+            Name = notification.Product.Name,
+            Category = notification.Product.Category,
+            Description = notification.Product.Description,
+            ImageFile = notification.Product.ImageFile,
+            Price = notification.Product.Price
+        };
+
+        await bus.Publish(integrationEvent, cancellationToken);
     }
 }

@@ -39,11 +39,11 @@ public class UpdateProductHandler(CatalogDbContext dbContext)
     private void UpdateProductWithNewValues(Product product, ProductDto commandProduct)
     {
         product.Update(
-            product.Name,
-            product.Category,
-            product.Description,
-            product.ImageFile,
-            product.Price
+            commandProduct.Name,
+            commandProduct.Category,
+            commandProduct.Description,
+            commandProduct.ImageFile,
+            commandProduct.Price
         );
     }
 }

@@ -1,5 +1,6 @@
 using System.Reflection;
 using MassTransit;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Shared.Messaging.Extensions;
@@ -7,7 +8,7 @@ namespace Shared.Messaging.Extensions;
 public static class MassTransitExtensions
 {
     public static IServiceCollection AddMassTransitWithAssemblies
-    (this IServiceCollection services, params Assembly[] assemblies)
+    (this IServiceCollection services, IConfiguration configuration, params Assembly[] assemblies)
     {
         services.AddMassTransit(config =>
         {
@@ -20,9 +21,18 @@ public static class MassTransitExtensions
             config.AddSagas(assemblies);
             config.AddActivities(assemblies);
 
-            config.UsingInMemory((context, configurator) =>
+            // config.UsingInMemory((context, configurator) =>
+            // {
+            //     configurator.ConfigureEndpoints(context);
+            // });
+            config.UsingRabbitMq((context, confiurator) =>
             {
-                configurator.ConfigureEndpoints(context);
+                confiurator.Host(new Uri(configuration["MessageBroker:Host"]!), host =>
+                {
+                    host.Username(configuration["MessageBroker:UserName"]!);
+                    host.Password(configuration["MessageBroker:Password"]!);
+                });
+                confiurator.ConfigureEndpoints(context);
             });
         });
         

@@ -23,6 +23,7 @@ public class ProductPriceChangedHandler(IBus bus,ILogger<ProductPriceChangedEven
             Price = notification.Product.Price
         };
 
+        //Publish the event for the integration event handler to handle it
         await bus.Publish(integrationEvent, cancellationToken);
     }
 }

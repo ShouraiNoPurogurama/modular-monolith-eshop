@@ -18,8 +18,6 @@ public class UpdateItemPriceInBasketCommandValidator
 public class UpdateItemPriceInBasketHandler(BasketDbContext dbContext)
     : ICommandHandler<UpdateItemPriceInBasketCommand, UpdateItemPriceInBasketResult>
 {
-    private readonly BasketDbContext _dbContext = dbContext;
-
     public async Task<UpdateItemPriceInBasketResult> Handle(UpdateItemPriceInBasketCommand command,
         CancellationToken cancellationToken)
     {
@@ -28,7 +26,7 @@ public class UpdateItemPriceInBasketHandler(BasketDbContext dbContext)
         //Save to database
         //Return result
 
-        var items = await _dbContext.ShoppingCartItems
+        var items = await dbContext.ShoppingCartItems
             .Where(x => x.ProductId == command.ProductId)
             .ToListAsync(cancellationToken);
 

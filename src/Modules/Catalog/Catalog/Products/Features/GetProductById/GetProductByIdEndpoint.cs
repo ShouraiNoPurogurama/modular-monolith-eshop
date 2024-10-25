@@ -12,7 +12,7 @@ public class GetProductByIdEndpoint : ICarterModule
             {
                 var product = await sender.Send(new GetProductByIdQuery(id));
 
-                var response = product.Adapt<GetProductsResponse>();
+                var response = product.Adapt<GetProductByIdResponse>();
 
                 return Results.Ok(response);
             })

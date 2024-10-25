@@ -11,6 +11,7 @@ public class DispatchDomainEventsInterceptor (IMediator mediator)
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, 
         InterceptionResult<int> result)
     {
+        //Dispatch all domain events before saving changes to DB
         DispatchDomainEvents(eventData.Context).GetAwaiter().GetResult();
         return base.SavingChanges(eventData, result);
     }

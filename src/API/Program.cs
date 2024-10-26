@@ -1,3 +1,4 @@
+using Keycloak.AuthServices.Authentication;
 using Shared.Messaging.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,9 @@ builder.Services.AddMassTransitWithAssemblies(builder.Configuration ,catalogAsse
 
 builder.Services.AddControllers();
 
+builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
+builder.Services.AddAuthorization();
+
 //Module services: catalog, basket, ordering
 builder.Services
     .AddCatalogModule(config)
@@ -35,19 +39,19 @@ builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
 
+//configure the HTTP request pipeline
 app.MapCarter();
 app.UseSerilogRequestLogging();
 //Force the app to use custom exception handler
 app.UseExceptionHandler(option => { });
 
+app.UseStaticFiles();
+app.UseAuthentication();
+app.UseAuthorization();
+
 app
     .UseCatalogModule()
     .UseBasketModule()
     .UseOrderingModule();
-
-//configure the HTTP request pipeline
-app.UseStaticFiles();
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.Run();

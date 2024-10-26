@@ -11,10 +11,11 @@ var config = builder.Configuration;
 //C:/ASPNetCore/modular-monolith-eshop/src/API/bin/Debug/net8.0/Catalog.dll
 var catalogAssembly = typeof(CatalogModule).Assembly;
 var basketAssembly = typeof(BasketModule).Assembly;
+var orderingAssembly = typeof(OrderingModule).Assembly;
 
 //Common services: carter, mediatr, FluentValidation
-builder.Services.AddCarterWithAssemblies(catalogAssembly, basketAssembly);
-builder.Services.AddMediatRWithAssemblies(catalogAssembly, basketAssembly);
+builder.Services.AddCarterWithAssemblies(catalogAssembly, basketAssembly, orderingAssembly);
+builder.Services.AddMediatRWithAssemblies(catalogAssembly, basketAssembly, orderingAssembly);
 
 //Regis redis cache
 builder.Services.AddStackExchangeRedisCache(options =>

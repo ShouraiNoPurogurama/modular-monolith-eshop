@@ -27,7 +27,7 @@ public class GetOrdersHandler : IQueryHandler<GetOrdersQuery, GetOrdersResult>
 
         var totalCount = await _dbContext.Orders.LongCountAsync(cancellationToken);
 
-        var orders = _dbContext.Orders.AsNoTracking()
+        var orders = await _dbContext.Orders.AsNoTracking()
             .Include(x => x.Items)
             .OrderBy(o => o.OrderName)
             .Skip(pageIndex * pageSize)

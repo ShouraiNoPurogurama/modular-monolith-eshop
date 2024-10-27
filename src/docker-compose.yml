@@ -10,7 +10,7 @@ services:
       - POSTGRES_DB=EShopDb
     restart: always
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - postgres_eshopdb:/var/lib/postgresql/data/
   
@@ -42,9 +42,9 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-    
+  
   identity:
-    image: quay.io/keycloak/keycloak:24.0.3
+    image: quay.io/keycloak/keycloak:26.0.2
     container_name: identity
     environment:
       - KEYCLOAK_ADMIN=admin

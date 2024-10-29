@@ -8,7 +8,8 @@ using Guid = System.Guid;
 
 namespace Ordering.Orders.EventHandlers;
 
-public class BasketCheckoutIntegrationEventHandler(ISender sender, ILogger<BasketCheckoutIntegrationEventHandler> logger)
+public class BasketCheckoutIntegrationEventHandler
+    (ISender sender, ILogger<BasketCheckoutIntegrationEventHandler> logger)
     : IConsumer<BasketCheckoutIntegrationEvent>
 {
     public async Task Consume(ConsumeContext<BasketCheckoutIntegrationEvent> context)

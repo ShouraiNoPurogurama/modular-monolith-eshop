@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Basket.Basket.Models;
+using Basket.Data.Processors;
 using Shared.Messaging.Events;
 
 namespace Basket.Basket.Features.CheckoutBasket;
@@ -20,10 +21,12 @@ public class CheckoutBasketValidator : AbstractValidator<CheckoutBasketCommand>
 public class CheckoutBasketHandler : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
 {
     private readonly BasketDbContext _dbContext;
+    private readonly OutboxProcessor _outboxProcessor;
 
-    public CheckoutBasketHandler(BasketDbContext dbContext)
+    public CheckoutBasketHandler(BasketDbContext dbContext, OutboxProcessor outboxProcessor)
     {
         _dbContext = dbContext;
+        _outboxProcessor = outboxProcessor;
     }
 
     public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand request, CancellationToken cancellationToken)
@@ -57,6 +60,8 @@ public class CheckoutBasketHandler : ICommandHandler<CheckoutBasketCommand, Chec
 
             await _dbContext.SaveChangesAsync(cancellationToken);
             await transaction.CommitAsync(cancellationToken);
+            
+            // _outboxProcessor.StartPublishingIntegrationEvents();
         }
         catch (Exception e)
         {

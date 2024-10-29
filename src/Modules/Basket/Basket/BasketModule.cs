@@ -24,6 +24,7 @@ public static class BasketModule
 
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+        services.AddScoped<OutboxProcessor>();
         
         services.AddDbContext<BasketDbContext>((sp, opt) =>
         {

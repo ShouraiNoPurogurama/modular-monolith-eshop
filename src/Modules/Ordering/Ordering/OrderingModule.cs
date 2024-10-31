@@ -23,14 +23,14 @@ public static class OrderingModule
             options.AddInterceptors(serviceProvider.GetService<ISaveChangesInterceptor>()!);
             options.UseNpgsql(connectionString);
         });
-        
+
         return services;
     }
-    
+
     public static IApplicationBuilder UseOrderingModule(this IApplicationBuilder app)
     {
         app.UseMigration<OrderingDbContext>();
-        
+
         return app;
     }
 }

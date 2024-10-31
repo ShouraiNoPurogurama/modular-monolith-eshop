@@ -13,7 +13,7 @@ var catalogAssembly = typeof(CatalogModule).Assembly;
 var basketAssembly = typeof(BasketModule).Assembly;
 var orderingAssembly = typeof(OrderingModule).Assembly;
 
-//Common services: carter, mediatr, FluentValidation
+//Common services: Carter, MediatR, FluentValidation
 builder.Services.AddCarterWithAssemblies(catalogAssembly, basketAssembly, orderingAssembly);
 builder.Services.AddMediatRWithAssemblies(catalogAssembly, basketAssembly, orderingAssembly);
 
